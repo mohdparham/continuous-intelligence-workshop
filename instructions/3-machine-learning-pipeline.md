@@ -14,11 +14,12 @@ ML model
 1. Configure DVC to use your GCP bucket for remote storage **(replace `X` with
   your user ID)**:
 ```bash
-dvc remote modify default url gs://cd4ml-bucket-X
+dvc remote modify default url gs://cd4ml-bucket-12
 ```
 
 2. Create your Machine Learning pipeline with dvc:
 ```bash
+pip install mlflow
 dvc run -f input.dvc -d src/download_data.py -o data/raw/store47-2016.csv python src/download_data.py
 dvc run -f split.dvc -d data/raw/store47-2016.csv -d src/splitter.py -o data/splitter/train.csv -o data/splitter/validation.csv python src/splitter.py
 dvc run -d data/splitter/train.csv -d data/splitter/validation.csv -d src/decision_tree.py -o data/decision_tree/model.pkl -M results/metrics.json python src/decision_tree.py
