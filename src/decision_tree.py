@@ -65,10 +65,10 @@ def train_model(train, model=Model.DECISION_TREE, seed=None):
     target = train['unit_sales']
 
     if model == Model.RANDOM_FOREST:
-        params = {'n_estimators': 20}
+        params = {'n_estimators': 10}
         clf = ensemble.RandomForestRegressor(random_state=seed, **params)
     elif model == Model.ADABOOST:
-        params = {'n_estimators': 50, 'learning_rate': 1.0, 'loss':'linear'}
+        params = {'n_estimators': 100, 'learning_rate': 1.0, 'loss':'linear'}
         clf = ensemble.AdaBoostRegressor(random_state=seed, **params)
     elif model == Model.GRADIENT_BOOST:
         params = {'n_estimators': 200, 'max_depth': 4}
